@@ -29,7 +29,7 @@ export default function App() {
       {data && !isLoading && <TaskList tasks={data} />}
       {isModalOpen && (
         <Modal onClose={closeModal}>
-          <TaskForm />
+          <TaskForm onClose={closeModal} />
         </Modal>
       )}
     </div>
