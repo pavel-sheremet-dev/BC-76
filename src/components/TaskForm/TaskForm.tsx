@@ -1,27 +1,31 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import css from "./TaskForm.module.css";
-import { addTask } from "../../services/taskService";
-import { type NewTaskData } from "../../types/task";
+import type { NewTask } from "../../types/task";
+import { createNewTask } from "../../services/taskService";
 
 interface TaskFormProps {
-  onSuccess: () => void;
+  onClose: () => void;
 }
 
-export default function TaskForm({ onSuccess }: TaskFormProps) {
+export default function TaskForm({ onClose }: TaskFormProps) {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: (taskData: NewTaskData) => addTask(taskData),
+  const mutation = useMutation({
+    mutationFn: (newTask: NewTask) => createNewTask(newTask),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
-      onSuccess();
+      queryClient.invalidateQueries({
+        queryKey: ["tasks"],
+      });
+      onClose();
     },
   });
 
   const handleSubmit = (formData: FormData) => {
-    mutate({
+    const newTask: NewTask = {
       text: formData.get("text") as string,
-    });
+    };
+
+    mutation.mutate(newTask);
   };
 
   return (
@@ -32,7 +36,7 @@ export default function TaskForm({ onSuccess }: TaskFormProps) {
       </label>
 
       <button type="submit" className={css.button}>
-        {isPending ? "Creating new task..." : "Create"}
+        {mutation.isPending ? "Creating new task" : "Create"}
       </button>
     </form>
   );
