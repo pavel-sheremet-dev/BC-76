@@ -2,16 +2,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Task, UpdatedTask } from "../../types/task";
 import css from "./TaskList.module.css";
 import { deleteTask, updateTask } from "../../services/taskService";
-import Modal from "../Modal/Modal";
-import { useModal } from "../../hooks/useModal";
 
 interface TaskListProps {
   tasks: Task[];
+  onSelect: (task: Task) => void;
 }
 
-export default function TaskList({ tasks }: TaskListProps) {
-  const { isOpen, toggleModal } = useModal();
-
+export default function TaskList({ tasks, onSelect }: TaskListProps) {
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
@@ -43,42 +40,35 @@ export default function TaskList({ tasks }: TaskListProps) {
   };
 
   return (
-    <>
-      <ul className={css.list}>
-        {tasks.map((task) => (
-          <li key={task.id} className={css.item}>
-            <input
-              type="checkbox"
-              defaultChecked={task.completed}
-              className={css.checkbox}
-              onChange={() => onCheckBoxChange(task)}
-            />
-            <span className={css.text}>{task.text}</span>
+    <ul className={css.list}>
+      {tasks.map((task) => (
+        <li key={task.id} className={css.item}>
+          <input
+            type="checkbox"
+            defaultChecked={task.completed}
+            className={css.checkbox}
+            onChange={() => onCheckBoxChange(task)}
+          />
+          <span className={css.text}>{task.text}</span>
 
-            <button
-              type="button"
-              className={css.button}
-              onClick={() => deleteMutation.mutate(task.id)}
-            >
-              Delete
-            </button>
-            <button
-              type="button"
-              className={css.button}
-              onClick={() => {
-                toggleModal();
-              }}
-            >
-              Open Details
-            </button>
-          </li>
-        ))}
-      </ul>
-      {isOpen && (
-        <Modal onClose={toggleModal}>
-          <div>TASKS DETAILS</div>
-        </Modal>
-      )}
-    </>
+          <button
+            type="button"
+            className={css.button}
+            onClick={() => deleteMutation.mutate(task.id)}
+          >
+            {deleteMutation.isPending && deleteMutation.variables === task.id
+              ? "Deleting"
+              : "Delete"}
+          </button>
+          <button
+            type="button"
+            className={css.button}
+            onClick={() => onSelect(task)}
+          >
+            Open Details
+          </button>
+        </li>
+      ))}
+    </ul>
   );
 }

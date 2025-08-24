@@ -7,7 +7,7 @@ export type OrderValue = "asc" | "desc";
 
 interface GetTasksParams {
   search: string;
-  order: OrderValue;
+  order?: OrderValue;
   page: number;
 }
 
