@@ -1,24 +1,24 @@
-import axios from "axios";
+import { getTasks } from "@/lib/api";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import TasksClient from "./TasksClient";
 
-import Container from "@/components/Container/Container";
+export default async function TasksPage() {
+  const queryClient = new QueryClient();
+  const search = "";
+  const page = 1;
 
-const TasksPage = async () => {
-  const { data } = await axios.get<{ id: number; title: string }[]>(
-    "https://jsonplaceholder.typicode.com/todos"
-  );
+  await queryClient.prefetchQuery({
+    queryKey: ["tasks", search, page],
+    queryFn: () => getTasks({ search, page }),
+  });
 
   return (
-    <section>
-      <Container>
-        <h1>Tasks Page</h1>
-        <ol>
-          {data.slice(0, 10).map((item) => (
-            <li key={item.id}>{item.title}</li>
-          ))}
-        </ol>
-      </Container>
-    </section>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <TasksClient />
+    </HydrationBoundary>
   );
-};
-
-export default TasksPage;
+}

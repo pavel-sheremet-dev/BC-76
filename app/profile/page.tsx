@@ -4,6 +4,15 @@ import axios from "axios";
 const ProfilePage = async () => {
   console.log("Profile Page");
 
+  await new Promise((res, reject) => {
+    setTimeout(() => {
+      if (Math.random() > 0.5) {
+        res("Success");
+      } else {
+        reject("OOOOPS");
+      }
+    }, 5000);
+  });
   const { data } = await axios.get<{ id: number; name: string; email: string }>(
     "https://jsonplaceholder.typicode.com/users/2"
   );
