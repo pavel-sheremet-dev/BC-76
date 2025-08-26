@@ -1,0 +1,23 @@
+.header {
+  padding: 8px 0;
+  border-bottom: 1px solid #484848;
+}
+
+.box {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.list {
+  display: flex;
+  gap: 8px;
+}
+
+.active {
+  color: green;
+}
+
+.logo {
+  font-weight: 600;
+}
