@@ -23,6 +23,9 @@ const Header = () => {
             <li>
               <Link href="/tasks">Tasks</Link>
             </li>
+            <li>
+              <Link href="/goods">Goods</Link>
+            </li>
           </ul>
         </nav>
       </Container>

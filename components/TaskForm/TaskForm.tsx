@@ -4,20 +4,24 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import css from "./TaskForm.module.css";
 import type { NewTask } from "@/types/task";
 import { createNewTask } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 interface TaskFormProps {
   onClose: () => void;
 }
 
 export default function TaskForm({ onClose }: TaskFormProps) {
+  const router = useRouter();
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (newTask: NewTask) => createNewTask(newTask),
-    onSuccess: () => {
+    onSuccess: (createTask) => {
       queryClient.invalidateQueries({
         queryKey: ["tasks"],
       });
+      console.log(createTask.id);
+      router.push(`/tasks/${createTask.id}`);
       onClose();
     },
   });

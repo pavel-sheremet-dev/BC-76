@@ -1,5 +1,6 @@
 import Container from "@/components/Container/Container";
 import axios from "axios";
+import Link from "next/link";
 
 const ProfilePage = async () => {
   console.log("Profile Page");
@@ -23,6 +24,7 @@ const ProfilePage = async () => {
         <h1>Profile Page</h1>
         <p>{data.name}</p>
         <p>{data.email}</p>
+        <Link href="/profile/edit">Edit</Link>
       </Container>
     </section>
   );
