@@ -15,19 +15,6 @@ const GoodsLayout = ({ children }: { children: React.ReactNode }) => {
               <ul style={{ paddingLeft: 20 }}>
                 <li>
                   <Link href="/goods/computers/pc">PC</Link>
-                  <ul style={{ paddingLeft: 20 }}>
-                    <li>
-                      <Link href="/goods/computers/pc/for_gaming">Gaming</Link>
-                    </li>
-                    <li>
-                      <Link href="/goods/computers/pc/work">Work</Link>
-                    </li>
-                    <li>
-                      <Link href="/goods/computers/pc/education">
-                        Education
-                      </Link>
-                    </li>
-                  </ul>
                 </li>
                 <li>
                   <Link href="/goods/computers/laptops">Laptops</Link>

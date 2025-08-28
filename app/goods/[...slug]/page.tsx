@@ -7,12 +7,15 @@ interface Props {
 const GoodsPage = async ({ params }: Props) => {
   const { slug } = await params;
 
+  const category = slug[0];
+  const subcategory = slug[1];
+
   return (
     <section>
       <Container>
         <h1>Goods Page</h1>
-        <p>Category: {slug[0]}</p>
-        <p>Subcategory: {slug[1]}</p>
+        <p>Category: {category}</p>
+        {subcategory && <p>Subcategory: {subcategory}</p>}
       </Container>
     </section>
   );

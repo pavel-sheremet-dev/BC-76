@@ -14,17 +14,24 @@ const Header = () => {
         </Link>
         <nav>
           <ul className={styles.list}>
-            <li>
+            {/* Redirect example */}
+            {/* <li>
               <Link href="/about">About</Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link href="/profile">Profile</Link>
-            </li>
+            </li> */}
             <li>
               <Link href="/tasks">Tasks</Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="/goods">Goods</Link>
+            </li> */}
+            <li>
+              <Link href="/mails">Mails</Link>
+            </li>
+            <li>
+              <Link href="/products">Products</Link>
             </li>
           </ul>
         </nav>

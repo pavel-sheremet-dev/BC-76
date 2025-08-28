@@ -1,7 +1,5 @@
-import Loader from "@/components/Loader/Loader";
-
 const LoaderCommponent = () => {
-  return <Loader />;
+  return <h1>Loading...</h1>;
 };
 
 export default LoaderCommponent;

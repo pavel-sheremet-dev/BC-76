@@ -61,7 +61,7 @@ export default function TaskList({ tasks }: TaskListProps) {
               : "Delete"}
           </button>
           <Link className={css.button} href={`/tasks/${task.id}`}>
-            Open Details
+            Details
           </Link>
         </li>
       ))}

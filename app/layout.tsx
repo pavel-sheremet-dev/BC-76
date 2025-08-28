@@ -30,19 +30,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div className={styles.layout}>
-          <TanstackProvider>
+        <TanstackProvider>
+          <div className={styles.layout}>
             <Header />
-            {children}
+            <main>{children}</main>
             <Footer />
-            <div id="modal-root"></div>
-          </TanstackProvider>
-        </div>
+          </div>
+        </TanstackProvider>
       </body>
     </html>
   );
 }
-
-// app/page.tsx >>>> localhost:3000/ >>>> HomePage() >>> html >>>> browser
-// localhost:3000/profile >>> app/profile/page.tsx > ProfilePage() >>>> browser
-//localhost:3000/about >>> app/about/page.tsx
