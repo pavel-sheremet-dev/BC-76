@@ -5,16 +5,15 @@ import Card from "@/components/Card/Card";
 
 interface Props {
   children: React.ReactNode;
+  sidebar: React.ReactNode;
 }
 
-const MailServiceLayout = ({ children }: Props) => {
+const MailServiceLayout = async ({ children, sidebar }: Props) => {
   return (
     <div className={styles.dashboard}>
       <Container className={styles.grid}>
         <aside className={styles.sidebar}>
-          <Card>
-            <h3>Categories</h3>
-          </Card>
+          <Card>{sidebar}</Card>
         </aside>
         <div className={styles.products}>
           <Card>{children}</Card>

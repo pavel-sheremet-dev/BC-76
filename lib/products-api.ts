@@ -7,7 +7,7 @@ const productsApi = axios.create({
 
 export const fetchProductsByCategory = async (category: string) => {
   const res = await productsApi.get<{ products: Product[] }>(
-    `/proucts/category/${category}`
+    category === "" ? "/products" : `/products/category/${category}`
   );
   return res.data.products;
 };
