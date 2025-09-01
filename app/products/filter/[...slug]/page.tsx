@@ -1,5 +1,7 @@
+import ProductList from "@/components/ProductList/ProductList";
 import { fetchProductsByCategory } from "@/lib/products-api";
-import Link from "next/link";
+
+import styles from "./page.module.css";
 
 interface Props {
   params: Promise<{ slug: string[] }>;
@@ -16,16 +18,9 @@ const ProductsPageByCategory = async ({ params }: Props) => {
 
   return (
     <section>
-      <div>
-        <h3>Products</h3>
-        <ul>
-          {products.map((item) => (
-            <li key={item.id}>
-              <p>{item.title}</p>
-              <Link href={`/products/${item.id}`}>Open Details</Link>
-            </li>
-          ))}
-        </ul>
+      <div className={styles.container}>
+        <h3>Products Page</h3>
+        <ProductList products={products} />
       </div>
     </section>
   );

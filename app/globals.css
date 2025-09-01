@@ -19,7 +19,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-roboto);
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -32,19 +32,23 @@ body {
 }
 
 a {
+  display: block;
   color: inherit;
   text-decoration: none;
-  font-family: var(--font-geist-sans);
 }
 
 ul,
 ol {
   list-style: none;
-  font-family: var(--font-geist-sans);
 }
 
-p {
-  font-family: var(--font-geist-sans);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-montserrat);
 }
 
 /* @media (prefers-color-scheme: dark) {

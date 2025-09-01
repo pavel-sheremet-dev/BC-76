@@ -7,6 +7,7 @@
   display: flex;
   gap: 12px;
   justify-content: space-between;
+  align-items: center;
 }
 
 .list {
@@ -14,8 +15,15 @@
   gap: 8px;
 }
 
+.link {
+  display: block;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
 .active {
-  color: green;
+  color: #fff;
+  background-color: #484848;
 }
 
 .logo {
