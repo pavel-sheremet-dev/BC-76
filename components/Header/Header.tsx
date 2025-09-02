@@ -26,11 +26,11 @@ const buildLinkClassName = ({
 };
 
 const navItems: { path: string; root_segment: string; label: string }[] = [
-  // {
-  //   path: "/about",
-  //   root_segment: "/about",
-  //   label: "About",
-  // },
+  {
+    path: "/about",
+    root_segment: "/about",
+    label: "About",
+  },
   {
     path: "/profile",
     root_segment: "/profile",
