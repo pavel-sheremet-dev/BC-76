@@ -5,23 +5,24 @@ import { useDebouncedCallback } from "use-debounce";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import TaskList from "@/components/TaskList/TaskList";
-import Modal from "@/components/Modal/Modal";
-import TaskForm from "@/components/TaskForm/TaskForm";
+// import Modal from "@/components/Modal/Modal";
+// import TaskForm from "@/components/TaskForm/TaskForm";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Loader from "@/components/Loader/Loader";
 import Pagination from "@/components/Pagination/Pagination";
 
-import { useModal } from "@/hooks/useModal";
+// import { useModal } from "@/hooks/useModal";
 
 import css from "./page.module.css";
 
 import { getTasks } from "@/lib/api";
+import Link from "next/link";
 
 export default function TasksClient() {
   const [filterValue, setFilterValue] = useState("");
   const [page, setPage] = useState(1);
 
-  const [isFormOpen, toggleFormModal] = useModal();
+  // const [isFormOpen, toggleFormModal] = useModal();
 
   const {
     data: tasks,
@@ -60,19 +61,22 @@ export default function TasksClient() {
             />
           )}
         </div>
-        <button className={css.createButton} onClick={toggleFormModal}>
+        <Link className={css.createButton} href="/tasks/action/create">
           Create task
-        </button>
+        </Link>
+        {/* <button className={css.createButton} onClick={toggleFormModal}>
+          Create task
+        </button> */}
       </header>
       {isLoading && <Loader />}
       {/* Task List */}
       {isSuccess && tasks.length > 0 && <TaskList tasks={tasks} />}
       {/* New Task Form */}
-      {isFormOpen && (
+      {/* {isFormOpen && (
         <Modal onClose={toggleFormModal}>
           <TaskForm onClose={toggleFormModal} />
         </Modal>
-      )}
+      )} */}
     </div>
   );
 }

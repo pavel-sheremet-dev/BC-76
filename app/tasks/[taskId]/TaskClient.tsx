@@ -6,10 +6,12 @@ import { notFound, useParams, useRouter } from "next/navigation";
 
 import { useEffect } from "react";
 import Section from "@/components/Section/Section";
+import { useCounterStore } from "@/lib/store/counterStore";
 
 const TaskClient = () => {
   const { taskId } = useParams<{ taskId: string }>();
   const router = useRouter();
+  const { counter, increment } = useCounterStore();
 
   const { data, isLoading } = useQuery({
     queryKey: ["task", taskId],
@@ -25,6 +27,8 @@ const TaskClient = () => {
 
   return (
     <Section>
+      <div>Counter: {counter}</div>
+      <button onClick={() => increment(5)}>Incremet</button>
       {isLoading && <div>loading...</div>}
       {data && (
         <>

@@ -7,6 +7,7 @@ import styles from "./Header.module.css";
 
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
+import { useCounterStore } from "@/lib/store/counterStore";
 
 const buildLinkClassName = ({
   pathname,
@@ -59,6 +60,7 @@ const navItems: { path: string; root_segment: string; label: string }[] = [
 
 const Header = () => {
   const pathname = usePathname();
+  const counter = useCounterStore((s) => s.counter);
 
   return (
     <header className={styles.header}>
@@ -83,6 +85,7 @@ const Header = () => {
             ))}
           </ul>
         </nav>
+        <div>Counter: {counter}</div>
         <Link
           href="/login"
           className={buildLinkClassName({
