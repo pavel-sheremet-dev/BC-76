@@ -1,6 +1,12 @@
 import Section from "@/components/Section/Section";
 
 import axios from "axios";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Profile Page",
+  description: "Profile Page Description",
+};
 
 const ProfilePage = async () => {
   const { data } = await axios.get<{ id: number; name: string; email: string }>(

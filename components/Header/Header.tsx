@@ -17,7 +17,6 @@ const buildLinkClassName = ({
   slug: string;
   className?: string;
 }) => {
-  console.log("pathname", pathname, slug);
   return clsx(
     styles.link,
     pathname.startsWith(slug) && styles.active,
@@ -60,6 +59,7 @@ const navItems: { path: string; root_segment: string; label: string }[] = [
 
 const Header = () => {
   const pathname = usePathname();
+
   return (
     <header className={styles.header}>
       <Container className={styles.box}>
