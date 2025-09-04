@@ -1,66 +1,48 @@
 import axios from "axios";
-import type { NewTask, Task, UpdatedTask } from "@/types/task";
+import { Note, NewNote, Tag } from "@/types/note";
 
-axios.defaults.baseURL = "https://62584f320c918296a49543e7.mockapi.io";
+axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 
-export type OrderValue = "asc" | "desc";
+axios.defaults.headers.common.Authorization = `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`;
 
-interface GetTasksParams {
-  search: string;
-  order?: OrderValue;
-  page: number;
+export interface FetchNotesResponse {
+  notes: Note[];
+  totalPages: number;
 }
 
-export const getTasks = async ({ search, order, page }: GetTasksParams) => {
-  const res = await axios.get<Task[]>("/tasks", {
+interface FetchNotesProps {
+  searchText: string;
+  page: number;
+  tag: "" | Tag;
+}
+
+export const fetchNotes = async ({
+  page,
+  searchText,
+  tag,
+}: FetchNotesProps) => {
+  const response = await axios.get<FetchNotesResponse>("/notes", {
     params: {
-      search,
-      sortBy: "createdAt",
-      order,
-      limit: 4,
+      search: searchText,
       page,
+      perPage: 12,
+      ...(tag !== "" ? { tag } : {}),
     },
   });
-  return res.data;
+  return response.data;
 };
 
-export const getTaskById = async (taskId: string): Promise<Task> => {
-  const res = await axios.get<Task>(`/tasks/${taskId}`);
-  return res.data;
+export const createNote = async (newNote: NewNote) => {
+  const response = await axios.post<Note>("/notes", newNote);
+  return response.data;
 };
 
-export const createNewTask = async (taskData: NewTask): Promise<Task> => {
-  const res = await axios.post<Task>("/tasks", taskData);
-  return res.data;
+export const deleteNote = async (noteId: string) => {
+  const response = await axios.delete<Note>(`/notes/${noteId}`);
+  return response.data;
 };
 
-export const deleteTask = async (taskId: string): Promise<Task> => {
-  const res = await axios.delete<Task>(`/tasks/${taskId}`);
-  return res.data;
+export const fetchNoteById = async (noteId: string) => {
+  const response = await axios.get<Note>(`/notes/${noteId}`);
+  return response.data;
 };
-
-export const updateTask = async ({
-  id,
-  ...updatedTask
-}: UpdatedTask): Promise<Task> => {
-  const res = await axios.put<Task>(`/tasks/${id}`, updatedTask);
-  return res.data;
-};
-
-// {
-//     "text": "NEW TASK NAME",
-//     "completed": true,
-//     "createdAt": 1755338927,
-//     "id": "144"
-// }
-
-// {
-//     "completed": true,
-//     "id": "144"
-// }
-
-// {
-//     "text": "RETURN OLD TASK NAME",
-//     "completed": fasle,
-//     "id": "144"
-// }

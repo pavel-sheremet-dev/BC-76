@@ -39,10 +39,9 @@ export default function RootLayout({
   children: React.ReactNode;
   preview: React.ReactNode;
 }>) {
+  // AUTH PROVIDER
   return (
     <html lang="en">
-      {/* <body className={`${geistSans.variable} ${geistMono.variable}`}> */}
-      {/* <body className={[geistSans.variable, geistMono.variable].join(" ")}> */}
       <body className={clsx(montserrat.variable, roboto.variable)}>
         <TanstackProvider>
           <div className={styles.layout}>

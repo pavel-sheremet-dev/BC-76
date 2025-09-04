@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Section from "@/components/Section/Section";
-import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "BC-76 | Home Page",
@@ -11,20 +10,16 @@ export default function HomePage() {
   return (
     <Section>
       <h1>Home Page</h1>
-      <p>Welcome to MY APP</p>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis amet
-        tenetur consectetur illo expedita impedit corrupti quos. Beatae odit vel
-        possimus maxime officia culpa dolores laborum, ullam praesentium sit
-        sunt?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias non
+        architecto nemo soluta voluptatum quis itaque error vero, voluptates
+        iure.
       </p>
-      <Image
-        src="https://picsum.photos/536/354"
-        alt="image_alt"
-        priority
-        width={200}
-        height={200}
-      />
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
+        saepe qui rem quisquam quas beatae eos fugit ducimus possimus magnam
+        dolorem, odit tenetur, ratione cupiditate laboriosam animi, id ea ullam.
+      </p>
     </Section>
   );
 }

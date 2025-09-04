@@ -13,6 +13,7 @@
 .list {
   display: flex;
   gap: 8px;
+  align-items: center;
 }
 
 .link {
@@ -28,4 +29,5 @@
 
 .logo {
   font-weight: 600;
+  font-family: var(--font-montserrat);
 }

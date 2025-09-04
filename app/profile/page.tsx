@@ -1,25 +1,17 @@
+import Link from "next/link";
 import Section from "@/components/Section/Section";
 
-import axios from "axios";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Profile Page",
-  description: "Profile Page Description",
-};
-
-const ProfilePage = async () => {
-  const { data } = await axios.get<{ id: number; name: string; email: string }>(
-    "https://jsonplaceholder.typicode.com/users/2"
-  );
+export default async function Profile() {
+  // 1. запит за юзером і рендер
+  // 2. рендер користувача
+  // 3. Редагування
 
   return (
-    <Section>
-      <h1>Profile Page</h1>
-      <p>{data.name}</p>
-      <p>{data.email}</p>
-    </Section>
+    <>
+      <Section>
+        <h1>Profile Page</h1>
+        <Link href="/profile/edit">Edit</Link>
+      </Section>
+    </>
   );
-};
-
-export default ProfilePage;
+}
