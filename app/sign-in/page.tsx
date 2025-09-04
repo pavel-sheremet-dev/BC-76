@@ -1,22 +1,34 @@
 "use client";
 
 import Section from "@/components/Section/Section";
+import { Credentials, login } from "@/lib/api";
+import { useAuthStore } from "@/lib/store/authStore";
+import { useRouter } from "next/navigation";
 
 export default function SignIn() {
   // 1. login
   // 2. оновлення стану аутентифікації
   // 3. редірект (profile)
 
+  const setUser = useAuthStore((state) => state.setUser);
+  const router = useRouter();
+
   const handleSubmit = async (formData: FormData) => {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    const userData = {
+    const credentials: Credentials = {
       email,
       password,
     };
 
-    console.log("userData", userData);
+    try {
+      const user = await login(credentials);
+      setUser(user);
+      router.push("/profile");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

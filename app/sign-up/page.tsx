@@ -3,13 +3,11 @@
 import { Field, Form, Formik, FormikHelpers } from "formik";
 
 import Section from "@/components/Section/Section";
+import { Credentials, register } from "@/lib/api";
+import { useAuthStore } from "@/lib/store/authStore";
+import { useRouter } from "next/navigation";
 
-interface AuthUserData {
-  email: string;
-  password: string;
-}
-
-const initialValues: AuthUserData = {
+const initialValues: Credentials = {
   email: "",
   password: "",
 };
@@ -19,12 +17,22 @@ export default function SignUp() {
   // 2. оновлення стану аутентифікації
   // 3. редірект
 
+  const setUser = useAuthStore((state) => state.setUser);
+
+  const router = useRouter();
+
   const onSubmit = async (
-    values: AuthUserData,
-    actions: FormikHelpers<AuthUserData>
+    values: Credentials,
+    actions: FormikHelpers<Credentials>
   ) => {
-    console.log("values", values);
-    actions.resetForm();
+    try {
+      const user = await register(values);
+      setUser(user);
+      actions.resetForm();
+      router.push("/profile");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

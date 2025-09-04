@@ -8,6 +8,7 @@ import styles from "./layout.module.css";
 
 import TanstackProvider from "@/components/TanstackProvider/TanstackProvider";
 import clsx from "clsx";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 // import clsx from "clsx";
 
 const montserrat = Montserrat({
@@ -43,14 +44,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx(montserrat.variable, roboto.variable)}>
-        <TanstackProvider>
-          <div className={styles.layout}>
-            <Header />
-            <main>{children}</main>
-            <Footer />
-          </div>
-          <div>{preview}</div>
-        </TanstackProvider>
+        <AuthProvider>
+          <TanstackProvider>
+            <div className={styles.layout}>
+              <Header />
+              <main>{children}</main>
+              <Footer />
+            </div>
+            <div>{preview}</div>
+          </TanstackProvider>
+        </AuthProvider>
       </body>
     </html>
   );
