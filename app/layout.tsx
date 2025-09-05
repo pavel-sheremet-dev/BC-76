@@ -35,10 +35,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  preview,
 }: Readonly<{
   children: React.ReactNode;
-  preview: React.ReactNode;
 }>) {
   // AUTH PROVIDER
   return (
@@ -51,7 +49,6 @@ export default function RootLayout({
               <main>{children}</main>
               <Footer />
             </div>
-            <div>{preview}</div>
           </TanstackProvider>
         </AuthProvider>
       </body>

@@ -1,7 +1,8 @@
 "use client";
 
 import Section from "@/components/Section/Section";
-import { Credentials, login } from "@/lib/api";
+import { Credentials } from "@/lib/api/api";
+import { login } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
 import { useRouter } from "next/navigation";
 

@@ -1,16 +1,26 @@
 "use client";
 
 import Section from "@/components/Section/Section";
+import { updateUser } from "@/lib/api/clientApi";
+import { useAuthStore } from "@/lib/store/authStore";
+import { useRouter } from "next/navigation";
 
 export default function EditProfileClient() {
   // 1. оновлення юзеру
   // 2. оновлення стану юзера
   // 3. перенаправлення на сторінку профілю
 
+  const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
+
+  const router = useRouter();
+
   const handleSubmit = async (formData: FormData) => {
     const username = formData.get("username") as string;
 
-    console.log("username", username);
+    const user = await updateUser({ username });
+    setUser(user);
+    router.push("/profile");
   };
 
   return (
@@ -26,7 +36,7 @@ export default function EditProfileClient() {
             id="username"
             type="text"
             name="username"
-            defaultValue={"Current user name"}
+            defaultValue={user?.username ?? ""}
           />
         </div>
 
@@ -34,7 +44,9 @@ export default function EditProfileClient() {
 
         <div style={{ display: "flex", gap: 8 }}>
           <button type="submit">Save</button>
-          <button type="button">Cancel</button>
+          <button type="button" onClick={() => router.back()}>
+            Cancel
+          </button>
         </div>
       </form>
     </Section>

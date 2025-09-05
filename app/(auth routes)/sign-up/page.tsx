@@ -3,9 +3,10 @@
 import { Field, Form, Formik, FormikHelpers } from "formik";
 
 import Section from "@/components/Section/Section";
-import { Credentials, register } from "@/lib/api";
+import { register } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
 import { useRouter } from "next/navigation";
+import { Credentials } from "@/lib/api/api";
 
 const initialValues: Credentials = {
   email: "",

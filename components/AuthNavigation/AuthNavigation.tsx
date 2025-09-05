@@ -8,7 +8,7 @@ import { buildLinkClassName } from "@/lib/buildLinkClassName/buildLinkClassName"
 
 import styles from "./AuthNavigation.module.css";
 import { useAuthStore } from "@/lib/store/authStore";
-import { logout } from "@/lib/api";
+import { logout } from "@/lib/api/clientApi";
 
 export default function AuthNavigation() {
   const pathname = usePathname();

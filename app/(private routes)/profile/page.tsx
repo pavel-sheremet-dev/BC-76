@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Section from "@/components/Section/Section";
-import { getUser } from "@/lib/api";
+import { getUser } from "@/lib/api/serverApi";
 
 export default async function Profile() {
   // 1. запит за юзером і рендер

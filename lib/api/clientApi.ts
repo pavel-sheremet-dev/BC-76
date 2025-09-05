@@ -1,32 +1,17 @@
-import axios from "axios";
-import { Note, NewNote, Tag } from "@/types/note";
-import { AuthUser } from "@/types/user";
-
-const api = axios.create({
-  baseURL: "https://notehub-api.goit.study",
-  withCredentials: true,
-});
-
-export interface FetchNotesResponse {
-  notes: Note[];
-  totalPages: number;
-}
-
-interface FetchNotesProps {
-  searchText: string;
-  page: number;
-  tag: "" | Tag;
-}
-
-export interface Credentials {
-  email: string;
-  password: string;
-}
+import { Note, NewNote } from "@/types/note";
+import { User } from "@/types/user";
+import {
+  api,
+  Credentials,
+  FetchNotesProps,
+  FetchNotesResponse,
+  UserToUpdate,
+} from "./api";
 
 // register
 
 export const register = async (credentials: Credentials) => {
-  const { data } = await api.post<AuthUser>("/auth/register", credentials);
+  const { data } = await api.post<User>("/auth/register", credentials);
 
   return data;
 };
@@ -34,7 +19,7 @@ export const register = async (credentials: Credentials) => {
 // login
 
 export const login = async (credentials: Credentials) => {
-  const { data } = await api.post<AuthUser>("/auth/login", credentials);
+  const { data } = await api.post<User>("/auth/login", credentials);
 
   return data;
 };
@@ -44,6 +29,29 @@ export const login = async (credentials: Credentials) => {
 export const logout = async () => {
   await api.post<void>("/auth/logout");
 };
+
+// checkSession
+
+export const checkSession = async () => {
+  const { data } = await api.get<{ success: boolean }>("/auth/session");
+  return data;
+};
+
+//  getUser
+
+export const getUser = async () => {
+  const { data } = await api.get<User>("/users/me");
+  return data;
+};
+
+//  updateUser
+
+export const updateUser = async (updatedUser: UserToUpdate) => {
+  const { data } = await api.patch<User>("/users/me", updatedUser);
+  return data;
+};
+
+// notes
 
 export const fetchNotes = async ({
   page,
@@ -59,20 +67,6 @@ export const fetchNotes = async ({
     },
   });
   return response.data;
-};
-
-// checkSession
-
-export const checkSession = async () => {
-  const { data } = await api.get<{ message: string }>("/auth/session");
-  return data;
-};
-
-//  getUser
-
-export const getUser = async () => {
-  const { data } = await api.get<AuthUser>("/users/me");
-  return data;
 };
 
 export const createNote = async (newNote: NewNote) => {
