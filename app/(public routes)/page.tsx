@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Section from "@/components/Section/Section";
+import TextForm from "./Form";
 
 export const metadata: Metadata = {
   title: "BC-76 | Home Page",
@@ -20,6 +21,7 @@ export default function HomePage() {
         saepe qui rem quisquam quas beatae eos fugit ducimus possimus magnam
         dolorem, odit tenetur, ratione cupiditate laboriosam animi, id ea ullam.
       </p>
+      <TextForm />
     </Section>
   );
 }

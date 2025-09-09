@@ -7,6 +7,7 @@ import { register } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
 import { useRouter } from "next/navigation";
 import { Credentials } from "@/lib/api/api";
+import Link from "next/link";
 
 const initialValues: Credentials = {
   email: "",
@@ -54,6 +55,8 @@ export default function SignUp() {
           </div>
         </Form>
       </Formik>
+      <div>Already registered?</div>
+      <Link href={"/sign-in"}>Login</Link>
     </Section>
   );
 }

@@ -24,14 +24,29 @@ const Header = () => {
         </Link>
         <nav>
           <ul className={styles.list}>
-            <li>
-              <Link
-                className={clsx(styles.link, pathname === "/" && styles.active)}
-                href="/"
-              >
-                Home
-              </Link>
-            </li>
+            {!isAuthenticated && (
+              <>
+                <li>
+                  <Link
+                    className={clsx(
+                      styles.link,
+                      pathname === "/" && styles.active
+                    )}
+                    href="/"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={buildLinkClassName({ pathname, slug: "/about" })}
+                    href="/about"
+                  >
+                    About
+                  </Link>
+                </li>
+              </>
+            )}
             {isAuthenticated && (
               <li>
                 <Link

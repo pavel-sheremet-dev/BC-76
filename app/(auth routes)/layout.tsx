@@ -1,5 +1,6 @@
 "use client";
 
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -14,5 +15,5 @@ export default function AuthRoutesLayout({
     router.refresh();
   }, [router]);
 
-  return children;
+  return <AuthProvider>{children}</AuthProvider>;
 }
